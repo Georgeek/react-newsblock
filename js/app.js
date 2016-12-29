@@ -37,7 +37,7 @@ var Article = React.createClass({
     var author = this.props.data.author,
         text = this.props.data.text,
         bigText = this.props.data.bigText,
-        visible = this.state.visible;;
+        visible = this.state.visible;
 
     return (
       <div className='article'>
