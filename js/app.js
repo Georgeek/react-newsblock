@@ -92,8 +92,8 @@ var News = React.createClass({
 });
 
 var TestInput = React.createClass({
-  onChangeHandler: function(e) {
-    this.setState({ myValue: e.target.value })
+  componentDidMount: function() {
+    ReactDOM.findDOMNode(this.refs.myTestInput).focus();
   },
   onBtnClickHandler: function() {
     console.log(this.refs);
