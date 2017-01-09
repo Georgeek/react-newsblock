@@ -91,25 +91,53 @@ var News = React.createClass({
   }
 });
 
-var TestInput = React.createClass({
+var Add = React.createClass({
   componentDidMount: function() {
-    ReactDOM.findDOMNode(this.refs.myTestInput).focus();
+    ReactDOM.findDOMNode(this.refs.author).focus();
   },
-  onBtnClickHandler: function() {
-    console.log(this.refs);
-    console.log(ReactDOM.findDOMNode(this.refs.myTestInput).value);
+  onBtnClickHandler: function(e) {
+    e.preventDefault();
+    var author = ReactDOM.findDOMNode(this.refs.author).value;
+    var text = ReactDOM.findDOMNode(this.refs.text).value;
+    console.log(author + '\n' + text);
+  },
+  onCheckRuleClick: function(e) {
+    ReactDOM.findDOMNode(this.refs.alert_button).disabled = !e.target.checked;
   },
   render: function() {
     return (
-      <div>
+      <form className="add cf">
         <input 
-            className='test-input'
+            type='text'
+            className='add__author'
             defaultValue=''
-            placehoder='введите значение'
-            ref='myTestInput'
+            placehoder='Ваше имя'
+            ref='author'
         />
-        <button onClick={this.onBtnClickHandler}>Показать console.log</button>
-      </div>
+        <textarea
+            className='add__text'
+            defaultValue=''
+            placehoder='введите текст'
+            ref='text'
+        ></textarea>
+        <label className='add__checkrule'>
+            <input 
+                type='checkbox'
+                defaultChecked={false}
+                ref='checkrule'
+                onChange={this.onCheckRuleClick} />
+                Я согласен с правилами
+        </label>
+
+        <button 
+            type='button'
+            className='add__btn'
+            onClick={this.onBtnClickHandler}
+            ref='alert_button'
+            >
+            Показать console.log
+        </button>
+      </form>
     );
   }
 });
@@ -118,8 +146,8 @@ var App = React.createClass({
   render: function() {
     return (
       <div className='app'>
+        <Add />
         <h3>Новости</h3>
-        <TestInput />
         <News data={my_news} />
       </div>
     );
